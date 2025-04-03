@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="PemConverter.View.AnotherPageView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        Background="#1E1E1E" Foreground="White">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="210"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="250"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0"  
+               Name="FileLabel" FontSize="16" 
+               Content="Jada"  
+               HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,20,0,0" Width="350"
+               Foreground="White"/>
+
+            <Button Grid.Row="0"
+                    Grid.Column="1"
+                    Padding="5" Width="110" Height="30"
+                    Content="Neida!" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"
+                    Command="{Binding PemCommand}"                
+                    Background="Black" Foreground="White"
+                    FontSize="12" FontWeight="Bold"
+                    BorderThickness="0" BorderBrush="#666666"/>
+
+
+    </Grid>
+</UserControl>
