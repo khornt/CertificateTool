@@ -27,15 +27,15 @@
 
             <Label Grid.Row="0" Grid.Column="0"  
                Name="FileLabel" FontSize="16" 
-               Content="Jada"  
+               Content="GetToken"  
                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,20,0,0" Width="350"
                Foreground="White"/>
 
             <Button Grid.Row="0"
                     Grid.Column="1"
                     Padding="5" Width="110" Height="30"
-                    Content="Neida!" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"
-                    Command="{Binding PemCommand}"                
+                    Content="GetToken!" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"
+                    Command="{Binding TokenCommand}"                
                     Background="Black" Foreground="White"
                     FontSize="12" FontWeight="Bold"
                     BorderThickness="0" BorderBrush="#666666"/>

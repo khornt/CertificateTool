@@ -9,6 +9,7 @@ using PemConverter.Backend.LetsEncrypt.IO;
 using PemConverter.Backend.LetsEncrypt.Entities;
 using PemConverter.Backend.LetsEncrypt.WebClient;
 using PemConverter.Services.Acme;
+using PemConverter.Backend.OAuthTest;
 
 namespace PemConverter
 {
@@ -49,7 +50,10 @@ namespace PemConverter
             services.AddTransient<CreateCertificateViewModel>(s => new CreateCertificateViewModel(CreateCreateCertificatePageService(s),
                 s.GetRequiredService<AcmeService>(), s.GetRequiredService<AppConfig>()));
 
-            services.AddTransient<AnotherPageViewModel>(s => new AnotherPageViewModel(CreateAnotherPageService(s)));
+            services.AddTransient<AnotherPageViewModel>(s => new AnotherPageViewModel(CreateAnotherPageService(s),
+                s.GetRequiredService<TokenService>()
+
+                ));
 
             services.AddTransient<PemConverterViewModel>(s => 
                 new PemConverterViewModel(
@@ -61,9 +65,12 @@ namespace PemConverter
 
 
             services.AddSingleton<AcmeService>();
+            services.AddSingleton<TokenService>();
 
             services.AddSingleton<AcmeClient>(new AcmeClient(ApiEnvironment.LetsEncryptV2));
             services.AddSingleton<LocalStorage>();
+
+            
             
 
 
