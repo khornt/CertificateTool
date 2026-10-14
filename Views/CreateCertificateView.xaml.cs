@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace PemConverter.Views
+namespace CertTool.Views
 {
     /// <summary>
     /// Interaction logic for CreateCertificateView.xaml

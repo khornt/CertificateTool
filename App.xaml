@@ -1,7 +1,62 @@
 ﻿<Application
-    x:Class="PemConverter.App"
+    x:Class="CertTool.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:PemConverter">
-    <Application.Resources />
+    xmlns:local="clr-namespace:CertTool">
+    <Application.Resources>
+        <Style x:Key="PurpleHoverButton" TargetType="Button">
+    <Setter Property="Background" Value="#2A2A2E"/>
+    <Setter Property="Foreground" Value="White"/>
+    <Setter Property="Padding" Value="10,5"/>
+    <Setter Property="Margin" Value="5"/>
+    <Setter Property="Cursor" Value="Hand"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+    <Setter Property="BorderThickness" Value="0"/>
+
+    <Setter Property="Template">
+        <Setter.Value>
+            <ControlTemplate TargetType="Button">
+                <Border x:Name="ButtonBorder"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="6"
+                        SnapsToDevicePixels="True">
+
+                    <ContentPresenter
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="{TemplateBinding Padding}"/>
+                </Border>
+
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="ButtonBorder"
+                                Property="Background"
+                                Value="#44D9EF"/>
+                        <Setter Property="Foreground"
+                                Value="Black"/>
+                    </Trigger>
+
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter TargetName="ButtonBorder"
+                                Property="Background"
+                                Value="#2299BB"/>
+                        <Setter Property="Foreground"
+                                Value="White"/>
+                    </Trigger>
+
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter TargetName="ButtonBorder"
+                                Property="Opacity"
+                                Value="0.5"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Setter.Value>
+    </Setter>
+</Style>
+        
+        <Style TargetType="Button"
+               BasedOn="{StaticResource PurpleHoverButton}"/>
+        
+        </Application.Resources>
 </Application>

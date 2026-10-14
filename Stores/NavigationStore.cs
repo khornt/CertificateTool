@@ -1,7 +1,7 @@
 ﻿
-using PemConverter.ViewModels;
+using CertTool.ViewModels;
 
-namespace PemConverter.Stores
+namespace CertTool.Stores
 {
     public class NavigationStore
     {

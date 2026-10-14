@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace PemConverter.Backend.LetsEncrypt.Entities
+namespace CertTool.Backend.LetsEncrypt.Entities
 {
     public class Authorization : BaseEntity
     {

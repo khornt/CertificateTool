@@ -1,4 +1,4 @@
-﻿namespace PemConverter.Backend.LetsEncrypt.Interfaces
+﻿namespace CertTool.Backend.LetsEncrypt.Interfaces
 {
     public interface ILogger
     {

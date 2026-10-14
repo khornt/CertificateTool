@@ -1,4 +1,4 @@
-﻿namespace PemConverter.Backend.LetsEncrypt.Entities
+﻿namespace CertTool.Backend.LetsEncrypt.Entities
 {
     public class AccountPersisted
     {

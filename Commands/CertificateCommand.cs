@@ -1,9 +1,9 @@
 ﻿
-using PemConverter.Backend.LetsEncrypt.WebClient;
-using PemConverter.Models;
-using PemConverter.ViewModels;
+using CertTool.Backend.LetsEncrypt.WebClient;
+using CertTool.Models;
+using CertTool.ViewModels;
 
-namespace PemConverter.Commands
+namespace CertTool.Commands
 {
     //public class CertificateCommand : AsyncCommandBase
     //{

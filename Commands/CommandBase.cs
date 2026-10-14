@@ -1,7 +1,7 @@
 ﻿
 using System.Windows.Input;
 
-namespace PemConverter.Commands
+namespace CertTool.Commands
 {
     public class CommandBase(Action<object> executeAction) : ICommand
     {

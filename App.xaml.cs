@@ -1,17 +1,17 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
-using PemConverter.Models;
-using PemConverter.Models.Jwk;
-using PemConverter.Services;
-using PemConverter.Stores;
-using PemConverter.ViewModels;
-using PemConverter.Backend.LetsEncrypt.IO;
-using PemConverter.Backend.LetsEncrypt.Entities;
-using PemConverter.Backend.LetsEncrypt.WebClient;
-using PemConverter.Services.Acme;
-using PemConverter.Backend.OAuthTest;
+using CertTool.Models;
+using CertTool.Models.Jwk;
+using CertTool.Services;
+using CertTool.Stores;
+using CertTool.ViewModels;
+using CertTool.Backend.LetsEncrypt.IO;
+using CertTool.Backend.LetsEncrypt.Entities;
+using CertTool.Backend.LetsEncrypt.WebClient;
+using CertTool.Services.Acme;
+using CertTool.Backend.OAuthTest;
 
-namespace PemConverter
+namespace CertTool
 {
     public partial class App : Application
     {
@@ -45,12 +45,12 @@ namespace PemConverter
 
             services.AddSingleton<INavigationService>(s => PemNavigationService(s));
             services.AddSingleton<INavigationService>(s => CreateCreateCertificatePageService(s));
-            services.AddSingleton<INavigationService>(s => CreateAnotherPageService(s));
+            services.AddSingleton<INavigationService>(s => CreateCreateCertificatePageService(s));
             
             services.AddTransient<CreateCertificateViewModel>(s => new CreateCertificateViewModel(CreateCreateCertificatePageService(s),
                 s.GetRequiredService<AcmeService>(), s.GetRequiredService<AppConfig>()));
 
-            services.AddTransient<AnotherPageViewModel>(s => new AnotherPageViewModel(CreateAnotherPageService(s),
+            services.AddTransient<SelfSignedCertViewModel>(s => new SelfSignedCertViewModel(CreateAnotherPageService(s),
                 s.GetRequiredService<TokenService>()
 
                 ));
@@ -111,8 +111,8 @@ namespace PemConverter
 
         private INavigationService CreateAnotherPageService(IServiceProvider serviceProvider)
         {
-            return new NavigationService<AnotherPageViewModel>(serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<AnotherPageViewModel>());
+            return new NavigationService<SelfSignedCertViewModel>(serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<SelfSignedCertViewModel>());
         }
     }
 }

@@ -2,11 +2,11 @@
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
-using PemConverter.Models;
-using PemConverter.Models.Jwk;
-using PemConverter.Services;
+using CertTool.Models;
+using CertTool.Models.Jwk;
+using CertTool.Services;
 
-namespace PemConverter.ViewModels
+namespace CertTool.ViewModels
 {
     public class PemConverterViewModel : ViewModelBase
     {

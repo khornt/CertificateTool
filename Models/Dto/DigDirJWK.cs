@@ -1,4 +1,4 @@
-﻿namespace PemConverter.Models.Dto
+﻿namespace CertTool.Models.Dto
 {
     public class DigDirJwk
     {

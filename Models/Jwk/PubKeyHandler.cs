@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using System.Security.Cryptography.X509Certificates;
-using PemConverter.Models.Jwk;
+using CertTool.Models.Jwk;
 
 
-namespace PemConverter.Models.Jwk
+namespace CertTool.Models.Jwk
 {
     public class PubKeyHandler
     {

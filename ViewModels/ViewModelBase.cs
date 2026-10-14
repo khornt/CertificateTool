@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 
 
-namespace PemConverter.ViewModels
+namespace CertTool.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged, IDisposable
     {

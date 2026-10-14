@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PemConverter.Models
+namespace CertTool.Models
 {
     public class AppConfig
     {

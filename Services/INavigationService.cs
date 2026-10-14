@@ -1,5 +1,5 @@
 ﻿
-namespace PemConverter.Services
+namespace CertTool.Services
 {
     public interface INavigationService
     {

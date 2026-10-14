@@ -1,42 +1,42 @@
 ﻿using System.Windows.Input;
-using PemConverter.Commands;
-using PemConverter.Services;
-using PemConverter.Stores;
+using CertTool.Commands;
+using CertTool.Services;
+using CertTool.Stores;
 
-namespace PemConverter.ViewModels
+namespace CertTool.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
         private readonly NavigationStore _navigationStore;
         private readonly INavigationService _pemNavigationService;
         private readonly INavigationService _testPageNavigationService;
-        private readonly INavigationService _anotherPageNavigationService;
+        private readonly INavigationService _selfSignedCertPageNavigationService;
         
 
 
         public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
         public ICommand PemConverterCommand { get; internal set; }
         public ICommand TestPageCommand { get; internal set; }
-        public ICommand AnotherPageCommand { get; internal set; }
+        public ICommand SelfSignedCertPageCommand { get; internal set; }
 
 
 
         public MainViewModel(NavigationStore navigationStore, 
             INavigationService pemNavigationService, 
             INavigationService testPageNavigationService,
-            INavigationService anotherPageNavigationService
+            INavigationService selfSignedCertPageNavigationService
             )
         {
             _navigationStore = navigationStore;
             _pemNavigationService = pemNavigationService;
             _testPageNavigationService = testPageNavigationService;
-            _anotherPageNavigationService = anotherPageNavigationService;
+            _selfSignedCertPageNavigationService = selfSignedCertPageNavigationService;
 
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
             PemConverterCommand = new CommandBase(ExecutePemConverterCommand);
             TestPageCommand = new CommandBase(ExecuteTestPageCommand);
-            AnotherPageCommand = new CommandBase(ExecuteAnotherPageCommand);
+            SelfSignedCertPageCommand = new CommandBase(ExecuteSelfSignedCertPageCommand);
         }
 
         private void ExecuteTestPageCommand(object obj)
@@ -45,9 +45,9 @@ namespace PemConverter.ViewModels
             _testPageNavigationService.Navigate();
         }
 
-        private void ExecuteAnotherPageCommand(object obj)
+        private void ExecuteSelfSignedCertPageCommand(object obj)
         {
-            _anotherPageNavigationService.Navigate();
+            _selfSignedCertPageNavigationService.Navigate();
         }
 
         private void ExecutePemConverterCommand(object obj)

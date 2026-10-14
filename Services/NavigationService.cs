@@ -1,7 +1,7 @@
-﻿using PemConverter.Stores;
-using PemConverter.ViewModels;
+﻿using CertTool.Stores;
+using CertTool.ViewModels;
 
-namespace PemConverter.Services
+namespace CertTool.Services
 {
     public class NavigationService<TViewModel> : IStartUpNavigate, INavigationService where TViewModel  : ViewModelBase 
     {

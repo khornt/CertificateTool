@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace PemConverter.Backend.LetsEncrypt.Entities
+namespace CertTool.Backend.LetsEncrypt.Entities
 {
     public class Directory : BaseEntity
     {

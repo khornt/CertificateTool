@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace PemConverter
+namespace CertTool
 {
     public partial class MainWindow : Window
     {

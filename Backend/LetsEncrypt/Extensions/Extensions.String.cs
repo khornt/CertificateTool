@@ -1,6 +1,6 @@
 ﻿using System.Security;
 
-namespace PemConverter.Backend.LetsEncrypt.Extensions
+namespace CertTool.Backend.LetsEncrypt.Extensions
 {
     public static partial class Extensions
     {

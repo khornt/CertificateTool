@@ -3,7 +3,7 @@ using System.Windows.Input;
 using System.Linq.Expressions;
 
 
-namespace PemConverter.Commands
+namespace CertTool.Commands
 {
     public class TaskDelegateCommand<T> : DelegateCommandBase, ICommand
     {

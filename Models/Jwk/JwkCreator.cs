@@ -7,10 +7,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.OpenSsl;
-using PemConverter.Models.Dto;
+using CertTool.Models.Dto;
 using Formatting = Newtonsoft.Json.Formatting;
 
-namespace PemConverter.Models.Jwk
+namespace CertTool.Models.Jwk
 {
     public class JwkCreator
     {

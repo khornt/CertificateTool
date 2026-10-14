@@ -1,12 +1,12 @@
-﻿using PemConverter.Models.Dto;
+﻿using CertTool.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PemConverter.Backend.LetsEncrypt.Entities;
+using CertTool.Backend.LetsEncrypt.Entities;
 
-namespace PemConverter.Services.Acme
+namespace CertTool.Services.Acme
 {
     public interface IAcmeService
     {

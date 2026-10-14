@@ -2,7 +2,7 @@
 
 
 
-namespace PemConverter.Views
+namespace CertTool.Views
 {
     /// <summary>
     /// Interaction logic for Page1.xaml

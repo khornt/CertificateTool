@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography.X509Certificates;
-using PemConverter.Backend.LetsEncrypt.Cryptography;
+using CertTool.Backend.LetsEncrypt.Cryptography;
 
-namespace PemConverter.Backend.LetsEncrypt.Entities
+namespace CertTool.Backend.LetsEncrypt.Entities
 {
     public class Certificate
     {

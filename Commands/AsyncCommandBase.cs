@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace PemConverter.Commands
+namespace CertTool.Commands
 {
     public abstract class AsyncCommandBase : ICommand
     {

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using LetsEncrypt.Client.Json;
 using LetsEncrypt.Client.Jws;
 using Newtonsoft.Json;
-using PemConverter.Backend.LetsEncrypt.Cryptography;
+using CertTool.Backend.LetsEncrypt.Cryptography;
 
-namespace PemConverter.Backend.LetsEncrypt.Jws
+namespace CertTool.Backend.LetsEncrypt.Jws
 {
     public class JwsSigner
     {

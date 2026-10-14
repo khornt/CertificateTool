@@ -1,6 +1,6 @@
-﻿using PemConverter.Backend.LetsEncrypt.Entities;
+﻿using CertTool.Backend.LetsEncrypt.Entities;
 
-namespace PemConverter.Backend.LetsEncrypt.WebClient
+namespace CertTool.Backend.LetsEncrypt.WebClient
 {
     public partial class AcmeClient
     {

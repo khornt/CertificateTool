@@ -3,10 +3,10 @@ using System.Text;
 using System.Windows.Documents;
 using LetsEncrypt.Client.Json;
 using Newtonsoft.Json;
-using PemConverter.Backend.LetsEncrypt.Entities;
+using CertTool.Backend.LetsEncrypt.Entities;
 
 
-namespace PemConverter.Backend.LetsEncrypt.WebClient
+namespace CertTool.Backend.LetsEncrypt.WebClient
 {
     public class AcmeBaseWebClient
     {

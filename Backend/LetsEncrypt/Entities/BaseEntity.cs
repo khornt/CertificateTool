@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Newtonsoft.Json;
 
-namespace PemConverter.Backend.LetsEncrypt.Entities
+namespace CertTool.Backend.LetsEncrypt.Entities
 {
     public class BaseEntity
     {

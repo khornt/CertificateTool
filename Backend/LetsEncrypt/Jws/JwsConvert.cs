@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace PemConverter.Backend.LetsEncrypt.Jws
+namespace CertTool.Backend.LetsEncrypt.Jws
 {
     public class JwsConvert
     {

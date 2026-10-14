@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PemConverter.View
+namespace CertTool.Views
 {
     /// <summary>
     /// Interaction logic for CreateCertificateView.xaml
     /// </summary>
-    public partial class AnotherPageView : UserControl
+    public partial class SelfSignedCert : UserControl
     {
-        public AnotherPageView()
+        public SelfSignedCert()
         {
             InitializeComponent();
             

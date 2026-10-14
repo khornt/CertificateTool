@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PemConverter.Backend.LetsEncrypt.Entities;
+using CertTool.Backend.LetsEncrypt.Entities;
 
-namespace PemConverter.Models.Dto
+namespace CertTool.Models.Dto
 {
     public class ChallengeStore
     {

@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System;
 
-namespace PemConverter.Backend.LetsEncrypt.WebClient
+namespace CertTool.Backend.LetsEncrypt.WebClient
 {
     public partial class AcmeClient : AcmeBaseWebClient
     {

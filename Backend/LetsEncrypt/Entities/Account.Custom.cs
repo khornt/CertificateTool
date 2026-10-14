@@ -1,9 +1,9 @@
-﻿using PemConverter.Backend.LetsEncrypt.Cryptography;
-using PemConverter.Backend.LetsEncrypt.IO;
+﻿using CertTool.Backend.LetsEncrypt.Cryptography;
+using CertTool.Backend.LetsEncrypt.IO;
 using Newtonsoft.Json;
-using PemConverter.Backend.LetsEncrypt.Jws;
+using CertTool.Backend.LetsEncrypt.Jws;
 
-namespace PemConverter.Backend.LetsEncrypt.Entities
+namespace CertTool.Backend.LetsEncrypt.Entities
 {
     public partial class Account
     {
@@ -46,7 +46,7 @@ namespace PemConverter.Backend.LetsEncrypt.Entities
             //await _localStorage.PersistPublicKey(contactEmail, Key.ToPublicKeyPem());
         }
 
-        public void FillBy(PemConverter.Backend.LetsEncrypt.Entities.Account account)
+        public void FillBy(CertTool.Backend.LetsEncrypt.Entities.Account account)
         {
             this.UnknownContent = account.UnknownContent;
             this.Location = account.Location;
@@ -70,7 +70,7 @@ namespace PemConverter.Backend.LetsEncrypt.Entities
             };
         }
 
-        public static async Task<PemConverter.Backend.LetsEncrypt.Entities.Account> LoadAsync(string contactEmail)
+        public static async Task<CertTool.Backend.LetsEncrypt.Entities.Account> LoadAsync(string contactEmail)
         {
             var location = await _localStorage.LoadAccount(contactEmail);
             var privateKeyPem = await _localStorage.LoadPrivateKey(contactEmail);
@@ -78,7 +78,7 @@ namespace PemConverter.Backend.LetsEncrypt.Entities
 
             var key = new RsaKeyPair(privateKeyPem);
 
-            return new PemConverter.Backend.LetsEncrypt.Entities.Account(key, location);
+            return new CertTool.Backend.LetsEncrypt.Entities.Account(key, location);
         }
     }
 }

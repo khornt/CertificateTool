@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Security.Cryptography;
 
-namespace PemConverter.Backend.LetsEncrypt.Extensions
+namespace CertTool.Backend.LetsEncrypt.Extensions
 {
     public static partial class Extensions
     {
