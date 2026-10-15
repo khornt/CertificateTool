@@ -6,25 +6,64 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:viewModels="clr-namespace:CertTool.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewModels:SelfSignedCertViewModel}"
-        Background="Transparent" Foreground="White">
+        Background="Transparent" Foreground="White"
+        DataContextChanged="OnDataContextChanged">
     
     <UserControl.Resources>
         <Style TargetType="Button" BasedOn="{StaticResource PurpleHoverButton}"/>
+
+        <!-- Eye button displayed inside password input -->
+        <Style x:Key="PasswordRevealButton" TargetType="ToggleButton">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="0,6,6,0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#44555555"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Foreground" Value="#44D9EF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
     <Grid Background="Transparent">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="170"/>
+            <ColumnDefinition Width="190"/>
             <ColumnDefinition Width="210"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="80"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="60"/>
             <RowDefinition Height="250"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -45,43 +84,144 @@
             <!--         FontSize="12" FontWeight="Bold" -->
             <!--         BorderThickness="0" BorderBrush="#666666"/> -->
             
-            <Label Grid.Row="0" Grid.Column="0"  
-                   Name="FileLabel2" FontSize="16" 
-                   Content="Generate Certificate"  
-                   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,20,0,0" Width="350"
-                   Foreground="White"/>
+            
+            <Label Content="Generate Selfsigned Certificate:" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0"
+                   Foreground="White" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+            
+            <Label Content="Common Name (CN):" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0"
+                   Foreground="White" Grid.Row="1" Grid.Column="0" />
 
-            <Button Grid.Row="0"
-                    Grid.Column="1"
+            <TextBox Name="CommonName" Text="{Binding CommonName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" 
+                     TextAlignment="Left" VerticalAlignment="Top" Height="25" Width="200" Margin="0,5,0,0"
+                     Background="#333333" Padding="5,3,2,0" Foreground="White"
+                     BorderBrush="#555555" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"/>
+            
+            <Label Content="Org Unit (OU):" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0"
+                   Foreground="White" Grid.Row="2" Grid.Column="0" />
+
+            <TextBox Name="OrgUnit" Text="{Binding OrgUnit, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" 
+                     TextAlignment="Left" VerticalAlignment="Top" Height="25" Width="200" Margin="0,5,0,0"
+                     Background="#333333" Padding="5,3,2,0" Foreground="White"
+                     BorderBrush="#555555" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"/>
+            
+            <Label Content="Org (O):" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0"
+                   Foreground="White" Grid.Row="3" Grid.Column="0" />
+
+            <TextBox Name="Org" Text="{Binding Org, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" 
+                     TextAlignment="Left" VerticalAlignment="Top" Height="25" Width="200" Margin="0,5,0,0"
+                     Background="#333333" Padding="5,3,2,0" Foreground="White"
+                     BorderBrush="#555555" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"/>
+            
+            <Label Content="Locality (L):" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0"
+                   Foreground="White" Grid.Row="4" Grid.Column="0" />
+
+            <TextBox Name="Locality" Text="{Binding Localilty, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" 
+                     TextAlignment="Left" VerticalAlignment="Top" Height="25" Width="200" Margin="0,5,0,0"
+                     Background="#333333" Padding="5,3,2,0" Foreground="White"
+                     BorderBrush="#555555" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3"/>
+            
+            <Label Content="State/Province (S):" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0"
+                   Foreground="White" Grid.Row="5" Grid.Column="0" />
+
+            <TextBox Name="State" Text="{Binding State, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" 
+                     TextAlignment="Left" VerticalAlignment="Top" Height="25" Width="200" Margin="0,5,0,0"
+                     Background="#333333" Padding="5,3,2,0" Foreground="White"
+                     BorderBrush="#555555" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3"/>
+            
+            <Label Content="Country (C):" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0"
+                   Foreground="White" Grid.Row="6" Grid.Column="0" />
+
+            <TextBox Name="Country" Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" 
+                     TextAlignment="Left" VerticalAlignment="Top" Height="25" Width="200" Margin="0,5,0,0"
+                     Background="#333333" Padding="5,3,2,0" Foreground="White"
+                     BorderBrush="#555555" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3"/>
+            
+            <Label Content="Root pwd" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0"
+                   Foreground="White" Grid.Row="7" Grid.Column="0" />
+
+            <Grid Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3"
+                  Width="200" Height="25" Margin="0,5,0,0"
+                  HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Border Background="#333333" CornerRadius="6"
+                        BorderBrush="#555555" BorderThickness="1"/>
+                <PasswordBox x:Name="RootPasswordBox"
+                             Background="Transparent" Foreground="White"
+                             BorderThickness="0" Padding="5,3,32,0"
+                             PasswordChanged="RootPasswordChanged"/>
+                <TextBox x:Name="RootVisibleText"
+                         Background="Transparent" Foreground="White"
+                         BorderThickness="0" Padding="5,3,32,0"
+                         Visibility="Collapsed"
+                         TextChanged="RootVisibleTextChanged"/>
+                <ToggleButton x:Name="RootShowToggle"
+                              Content="👁" ToolTip="Show password"
+                              Style="{StaticResource PasswordRevealButton}"
+                              HorizontalAlignment="Right" VerticalAlignment="Center"
+                              Checked="RootToggleChanged"
+                              Unchecked="RootToggleChanged"/>
+            </Grid>
+            
+
+            <Label Content="Cert pwd:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                   Margin="15,0,0,0" Foreground="White" Grid.Row="8" Grid.Column="0" />
+        
+            <Grid Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3"
+                  Width="200" Height="25" Margin="0,5,0,0"
+                  HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Border Background="#333333" CornerRadius="6"
+                        BorderBrush="#555555" BorderThickness="1"/>
+                <PasswordBox x:Name="CertPasswordBox"
+                             Background="Transparent" Foreground="White"
+                             BorderThickness="0" Padding="5,3,32,0"
+                             PasswordChanged="CertPasswordChanged"/>
+                <TextBox x:Name="CertVisibleText"
+                         Background="Transparent" Foreground="White"
+                         BorderThickness="0" Padding="5,3,32,0"
+                         Visibility="Collapsed"
+                         TextChanged="CertVisibleTextChanged"/>
+                <ToggleButton x:Name="CertShowToggle"
+                              Content="👁" ToolTip="Show password"
+                              Style="{StaticResource PasswordRevealButton}"
+                              HorizontalAlignment="Right" VerticalAlignment="Center"
+                              Checked="CertToggleChanged"
+                              Unchecked="CertToggleChanged"/>
+            </Grid>
+            
+            <!-- <Label Grid.Row="9" Grid.Column="0"   -->
+            <!--        Name="FileLabel2" FontSize="16"  -->
+            <!--        Content="Generate Certificate"   -->
+            <!--        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,20,0,0" Width="350" -->
+            <!--        Foreground="White"/> -->
+
+            <Label Content="Key algorithm:" FontSize="16" Foreground="White"
+                   Grid.Row="9" Grid.Column="0" Margin="15,0,0,0"/>
+            <ComboBox Grid.Row="9" Grid.Column="1" Width="200" Height="28"
+                      HorizontalAlignment="Left" VerticalAlignment="Top"
+                      Margin="0,5,0,0" ItemsSource="{Binding Algorithms}"
+                      SelectedItem="{Binding SelectedAlgorithm}"/>
+
+            <Label Content="Key size (bits):" FontSize="16" Foreground="White"
+                   Grid.Row="10" Grid.Column="0" Margin="15,0,0,0"/>
+            <ComboBox Grid.Row="10" Grid.Column="1" Width="200" Height="28"
+                      HorizontalAlignment="Left" VerticalAlignment="Top"
+                      Margin="0,5,0,0" ItemsSource="{Binding KeySizes}"
+                      SelectedItem="{Binding SelectedKeySize}"/>
+
+            <Label Content="Signature hash:" FontSize="16" Foreground="White"
+                   Grid.Row="11" Grid.Column="0" Margin="15,0,0,0"/>
+            <ComboBox Grid.Row="11" Grid.Column="1" Width="200" Height="28"
+                      HorizontalAlignment="Left" VerticalAlignment="Top"
+                      Margin="0,5,0,0" ItemsSource="{Binding SignatureHashes}"
+                      SelectedItem="{Binding SelectedSignatureHash}"/>
+
+            <Button Grid.Row="12"
+                    Grid.Column="0"
                     Padding="5" Width="110" Height="30"
-                    Content="Certificate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"
+                    Content="Generate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"
                     Command="{Binding SelfSignedCertCommand}"                
                     Background="Black" Foreground="White"
                     FontSize="12" FontWeight="Bold"
                     BorderThickness="0" BorderBrush="#666666"/>
-            
-            <Label Content="Hostname:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0"
-                   Foreground="White" Grid.Row="1" Grid.Column="0" />
-
-            <TextBox Name="Hostname" Text="{Binding Hostname, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" 
-                     TextAlignment="Left" VerticalAlignment="Top" Height="25" Width="200" Margin="0,5,0,0"
-                     Background="#333333" Padding="5,3,2,0" Foreground="White"
-                     BorderBrush="#555555" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"/>
-
-            <Label Content="Root pwd" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0"
-                   Foreground="White" Grid.Row="2" Grid.Column="0" />
-
-            <TextBox Name="RootPwd" Text="{Binding RootPwd, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" 
-                     TextAlignment="Left" VerticalAlignment="Top" Height="25" Width="200" Margin="0,5,0,0"
-                     Background="#333333" Padding="5,3,2,0" Foreground="White" BorderBrush="#555555" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"/>
-            
-
-            <Label Content="Cert pwd:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                   Margin="15,0,0,0" Foreground="White" Grid.Row="3" Grid.Column="0" />
-        
-            <TextBox Name="CrtPwd" Text="{Binding CertPwd, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"                  
-                     TextAlignment="Left" VerticalAlignment="Top" Height="25" Width="200" Margin="0,5,0,0"
-                     Background="#333333" Padding="5,3,2,0" Foreground="White" BorderBrush="#555555" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"/>
             
          
 

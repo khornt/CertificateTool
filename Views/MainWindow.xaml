@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:CertTool.Views"
         Background="#1E1E1E" Foreground="White"
         d:DataContext="{d:DesignInstance Type=vms:MainViewModel}"
-        Title="Certificate Manager" Height="680" Width="580">
+        Title="Certificate Manager" Height="780" Width="580">
 
         <Window.Resources>
         
@@ -46,7 +46,7 @@
        
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="600"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
     
