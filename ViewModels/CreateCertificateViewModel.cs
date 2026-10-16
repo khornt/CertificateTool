@@ -33,7 +33,7 @@ namespace CertTool.ViewModels
         private LocalStorage _lfh = new LocalStorage();
 
 
-        public CreateCertificateViewModel(INavigationService navigationService, IAcmeService acmeService,
+        public CreateCertificateViewModel(NavigationService<SelfSignedCertViewModel> navigationService, IAcmeService acmeService,
             AppConfig config)
         {
             _navigationService = navigationService;

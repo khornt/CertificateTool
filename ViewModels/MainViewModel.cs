@@ -9,40 +9,42 @@ namespace CertTool.ViewModels
     {
         private readonly NavigationStore _navigationStore;
         private readonly INavigationService _pemNavigationService;
-        private readonly INavigationService _testPageNavigationService;
+        private readonly INavigationService _createCertificateNavigationService;
         private readonly INavigationService _selfSignedCertPageNavigationService;
         
 
 
         public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
         public ICommand PemConverterCommand { get; internal set; }
-        public ICommand TestPageCommand { get; internal set; }
+        public ICommand CreateCertificateCommand { get; internal set; }
         public ICommand SelfSignedCertPageCommand { get; internal set; }
 
 
 
-        public MainViewModel(NavigationStore navigationStore, 
-            INavigationService pemNavigationService, 
-            INavigationService testPageNavigationService,
-            INavigationService selfSignedCertPageNavigationService
-            )
+        public MainViewModel(
+            NavigationStore navigationStore,
+            NavigationService<PemConverterViewModel> pemNavigationService,
+            NavigationService<SelfSignedCertViewModel> selfSignedNavigationService,
+            NavigationService<CreateCertificateViewModel> certificateNavigationService)
         {
             _navigationStore = navigationStore;
-            _pemNavigationService = pemNavigationService;
-            _testPageNavigationService = testPageNavigationService;
-            _selfSignedCertPageNavigationService = selfSignedCertPageNavigationService;
+
+            PemConverterCommand = new DelegateCommand(
+                pemNavigationService.Navigate);
+
+            SelfSignedCertPageCommand = new DelegateCommand(
+                selfSignedNavigationService.Navigate);
+
+            CreateCertificateCommand = new DelegateCommand(
+                certificateNavigationService.Navigate);
 
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
-
-            PemConverterCommand = new CommandBase(ExecutePemConverterCommand);
-            TestPageCommand = new CommandBase(ExecuteTestPageCommand);
-            SelfSignedCertPageCommand = new CommandBase(ExecuteSelfSignedCertPageCommand);
         }
 
         private void ExecuteTestPageCommand(object obj)
         {
             
-            _testPageNavigationService.Navigate();
+            _createCertificateNavigationService.Navigate();
         }
 
         private void ExecuteSelfSignedCertPageCommand(object obj)

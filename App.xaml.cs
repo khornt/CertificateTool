@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using CertTool.Models;
 using CertTool.Models.Jwk;
@@ -11,108 +12,72 @@ using CertTool.Backend.LetsEncrypt.WebClient;
 using CertTool.Services.Acme;
 using CertTool.Backend.OAuthTest;
 
-namespace CertTool
+namespace CertTool;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    private readonly ServiceProvider _serviceProvider;
+
+    public App()
     {
-        // https://stackoverflow.com/questions/1922204/open-directory-dialog
-        // Todo: Output folder
+        var services = new ServiceCollection();
 
-        private readonly IServiceProvider _serviceProvider;
-        private INavigationService _initPage;
+        services.AddSingleton<NavigationStore>();
+        services.AddSingleton<JwkCreator>();
+        services.AddSingleton<PubKeyHandler>();
+        services.AddSingleton<AppConfig>();
 
-        public App()
+        // Register each destination as its own typed service, instead of
+        // three competing registrations of INavigationService.
+        services.AddSingleton<NavigationService<PemConverterViewModel>>(sp =>
+            new NavigationService<PemConverterViewModel>(
+                sp.GetRequiredService<NavigationStore>(),
+                () => sp.GetRequiredService<PemConverterViewModel>()));
+
+        services.AddSingleton<NavigationService<CreateCertificateViewModel>>(sp =>
+            new NavigationService<CreateCertificateViewModel>(
+                sp.GetRequiredService<NavigationStore>(),
+                () => sp.GetRequiredService<CreateCertificateViewModel>()));
+
+        services.AddSingleton<NavigationService<SelfSignedCertViewModel>>(sp =>
+            new NavigationService<SelfSignedCertViewModel>(
+                sp.GetRequiredService<NavigationStore>(),
+                () => sp.GetRequiredService<SelfSignedCertViewModel>()));
+
+        services.AddSingleton<MainViewModel>();
+        services.AddSingleton<MainWindow>(sp => new MainWindow
         {
-            IServiceCollection services = new ServiceCollection();
+            DataContext = sp.GetRequiredService<MainViewModel>()
+        });
 
-            
-            services.AddSingleton<NavigationStore>();
-            services.AddSingleton<JwkCreator>();
-            services.AddSingleton<PubKeyHandler>();
-            services.AddSingleton<AppConfig>();
+        services.AddTransient<CreateCertificateViewModel>();
+        services.AddTransient<SelfSignedCertViewModel>();
+        services.AddTransient<PemConverterViewModel>();
 
-            services.AddSingleton<MainViewModel>(s => new MainViewModel(
-                    s.GetRequiredService<NavigationStore>(),
-                    PemNavigationService(s),
-                    CreateCreateCertificatePageService(s),
-                    CreateAnotherPageService(s)
-                ));
+        services.AddSingleton<IAcmeService, AcmeService>();
+        services.AddSingleton<TokenService>();
+        services.AddSingleton<AcmeClient>(new AcmeClient(ApiEnvironment.LetsEncryptV2));
+        services.AddSingleton<LocalStorage>();
 
-            services.AddSingleton<MainWindow>(s => new MainWindow()
+        _serviceProvider = services.BuildServiceProvider(
+            new ServiceProviderOptions
             {
-                DataContext = s.GetRequiredService<MainViewModel>()
+                ValidateScopes = true,
+                ValidateOnBuild = true
             });
+    }
 
-            services.AddSingleton<INavigationService>(s => PemNavigationService(s));
-            services.AddSingleton<INavigationService>(s => CreateCreateCertificatePageService(s));
-            services.AddSingleton<INavigationService>(s => CreateCreateCertificatePageService(s));
-            
-            services.AddTransient<CreateCertificateViewModel>(s => new CreateCertificateViewModel(CreateCreateCertificatePageService(s),
-                s.GetRequiredService<AcmeService>(), s.GetRequiredService<AppConfig>()));
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
+        _serviceProvider.GetRequiredService<NavigationService<PemConverterViewModel>>().Navigate();
+        MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+        MainWindow.Show();
+    }
 
-            services.AddTransient<SelfSignedCertViewModel>(s => new SelfSignedCertViewModel(CreateAnotherPageService(s),
-                s.GetRequiredService<TokenService>()
-
-                ));
-
-            services.AddTransient<PemConverterViewModel>(s => 
-                new PemConverterViewModel(
-                    s.GetRequiredService<JwkCreator>(), 
-                  s.GetRequiredService<PubKeyHandler>(),
-                    CreateCreateCertificatePageService(s),
-                        s.GetRequiredService<AppConfig>()
-                ));
-
-
-            services.AddSingleton<AcmeService>();
-            services.AddSingleton<TokenService>();
-
-            services.AddSingleton<AcmeClient>(new AcmeClient(ApiEnvironment.LetsEncryptV2));
-            services.AddSingleton<LocalStorage>();
-
-            
-            
-
-
-
-
-            _serviceProvider = services.BuildServiceProvider();
-        }
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            StartUpNavigate(_serviceProvider).Navigate();
-            
-            MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-            
-            MainWindow.Show();
-
-            base.OnStartup(e);
-        }
-
-
-        private IStartUpNavigate StartUpNavigate(IServiceProvider serviceProvider)
-        {
-            return new NavigationService<PemConverterViewModel>(serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<PemConverterViewModel>());
-        }
-
-        private INavigationService PemNavigationService(IServiceProvider serviceProvider)
-        {
-            return new NavigationService<PemConverterViewModel>(serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<PemConverterViewModel>());
-        }
-        
-        private INavigationService CreateCreateCertificatePageService(IServiceProvider serviceProvider)
-        {
-            return new NavigationService<CreateCertificateViewModel>(serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<CreateCertificateViewModel>());
-        }
-
-        private INavigationService CreateAnotherPageService(IServiceProvider serviceProvider)
-        {
-            return new NavigationService<SelfSignedCertViewModel>(serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<SelfSignedCertViewModel>());
-        }
+    protected override void OnExit(ExitEventArgs e)
+    {
+        _serviceProvider.Dispose();
+        base.OnExit(e);
     }
 }

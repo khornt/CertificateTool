@@ -30,7 +30,7 @@ namespace CertTool.ViewModels
         public PemConverterViewModel(
             JwkCreator jwkCreator,
             PubKeyHandler pubKeyHandler,
-            INavigationService navigationService,
+            NavigationService<CreateCertificateViewModel> navigationService,
             AppConfig config)
         {
             SelectFileCommand = new DelegateCommand(ExecuteSelectFileCommand);

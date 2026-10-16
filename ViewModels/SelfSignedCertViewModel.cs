@@ -4,10 +4,8 @@ using CertTool.Backend.OAuthTest;
 using CertTool.Commands;
 using CertTool.Models.Dto;
 using CertTool.Services;
-using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 
@@ -16,7 +14,6 @@ namespace CertTool.ViewModels
 {
     public class SelfSignedCertViewModel : ViewModelBase
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
         public ICommand TokenCommand { get; private set; }
         public ICommand SelfSignedCertCommand { get; private set; }
         private readonly INavigationService _navigationService;
@@ -66,7 +63,7 @@ namespace CertTool.ViewModels
         private string _rootPwd;
         private string _certPwd;
         
-        public SelfSignedCertViewModel(INavigationService navigationService, TokenService tokenService)
+        public SelfSignedCertViewModel(NavigationService<SelfSignedCertViewModel> navigationService, TokenService tokenService)
         {
             _navigationService = navigationService;
             _tokenService = tokenService;
@@ -114,12 +111,6 @@ namespace CertTool.ViewModels
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
 
         private bool CanExecute()
         {
